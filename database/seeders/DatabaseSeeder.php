@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $users = User::factory(10)->create();
 
 
-        $apartments = Apartment::factory(5)
+        $apartments = Apartment::factory(10)
             ->recycle($users)
             ->create();
 
