@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Apartment;
 use App\Models\User;
+use App\Models\Booking;
+
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -10,16 +13,19 @@ class DatabaseSeeder extends Seeder
 {
     use WithoutModelEvents;
 
-    /**
-     * Seed the application's database.
-     */
+    // database/seeders/DatabaseSeeder.php
     public function run(): void
     {
-        // User::factory(10)->create();
+        $users = User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+
+        $apartments = Apartment::factory(5)
+            ->recycle($users)
+            ->create();
+
+        Booking::factory(20)
+            ->recycle($users)
+            ->recycle($apartments)
+            ->create();
     }
 }

@@ -8,7 +8,8 @@ class Image extends Model
 {
     //
 
-    public function apartment(){
+    public function apartment()
+    {
         return $this->belongsTo(Apartment::class);
     }
 }
