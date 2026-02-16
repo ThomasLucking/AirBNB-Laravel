@@ -14,12 +14,12 @@
             <div class="flex flex-col gap-4 mt-6">
                 <div class="flex flex-col gap-1">
                     <label class="text-left text-xs font-bold uppercase tracking-wider text-gray-600">Email
-                        Adresse</label>
+                        Address</label>
                     <input name="email"
                         class="border-2 border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-red-500 transition-colors"
                         type="email" placeholder="you@example.com">
                     @error('email')
-                        <span style="color: red;">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -29,13 +29,13 @@
                         class="border-2 border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-red-500 transition-colors"
                         type="password" placeholder="••••••••">
                     @error('password')
-                        <span style="color: red;">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
 
                 <button
                     class="bg-red-500 hover:bg-red-600 active:scale-95 transform transition text-white font-bold py-3 rounded-xl mt-2 shadow-md shadow-red-100">
-                    Sign up
+                    Sign in
                 </button>
 
                 <a href="/register" class="text-sm text-gray-600 hover:text-gray-800 transition">

@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'name' => 'required|max:255|unique:users,name',
             'email' => 'required|email|max:255|unique:users,email',
-            'password' => ['required', 'string', 'min:8', 'regex:' . $password_pattern],
+            'password' => ['required', 'string', Password::min(8)->mixedCase()->numbers()->symbols()],
         ]);
 
 
@@ -26,9 +27,9 @@ class UserController extends Controller
 
         User::create($validated);
 
-        return redirect('/login')->with('success', 'Created account Succesfully');
+        return redirect('/login')->with('success', 'Created account Successfully');
 
-;
+
     }
 
 }

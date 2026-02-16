@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -15,16 +14,15 @@ class LoginController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
- 
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
-            return redirect()->intended('/')->with('success', 'Logged in succesfully');
+
+            return redirect()->intended('/')->with('success', 'Logged in successfully');
         }
- 
+
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
-            'password' => 'the password you provided is incorrect'
         ])->onlyInput('email');
     }
     public function destroySession(Request $request): RedirectResponse

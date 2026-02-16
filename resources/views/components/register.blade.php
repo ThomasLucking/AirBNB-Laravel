@@ -18,7 +18,7 @@
                         class="text-base border-2 border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-red-500 transition-colors"
                         type="text" placeholder="Thomas Lucking">
                     @error('name')
-                        <span style="color: red;">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -29,7 +29,7 @@
                         class="text-base border-2 border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-red-500 transition-colors"
                         type="email" placeholder="you@example.com">
                     @error('email')
-                        <span style="color: red;">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -40,7 +40,7 @@
                         class="text-base border-2 border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-red-500 transition-colors"
                         type="password" placeholder="••••••••">
                     @error('password')
-                        <span style="color: red;">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -49,7 +49,7 @@
                     Sign up
                 </button>
 
-                <a href="/login" class="text-sm text-gray-600 hover:text-gray-800 transition">
+                <a href="{{route('login')}}" class="text-sm text-gray-600 hover:text-gray-800 transition">
                     Already have an account? <span class="text-red-500 font-bold ml-1">Sign in</span>
                 </a>
             </div>
