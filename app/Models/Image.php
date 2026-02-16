@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Image extends Model
 {
@@ -10,7 +11,7 @@ class Image extends Model
     public $timestamps = false;
 
 
-    public function apartment()
+    public function apartment(): BelongsTo
     {
         return $this->belongsTo(Apartment::class);
     }
