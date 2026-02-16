@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->timestamp('start_date', precision: 0);
-            $table->timestamp('end_date', precision: 0);
+            $table->dateTime('start_date', precision: 0);
+            $table->dateTime('end_date', precision: 0);
             $table->decimal('total', total: 8, places: 2);
 
             $table->foreignId('user_id')->constrained();

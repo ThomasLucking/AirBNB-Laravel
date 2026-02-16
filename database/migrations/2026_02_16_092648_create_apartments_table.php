@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('price_per_night', total: 8, places: 2);
 
             $table->foreignId('user_id')->constrained();
-            $table->timestamps();
+            
 
         });
     }
