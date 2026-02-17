@@ -20,9 +20,7 @@ class UserController extends Controller
         ]);
 
 
-        $validated['password'] = Hash::make($validated['password']);
-
-
+        
         User::create($validated);
 
         return redirect('/login')->with('success', 'Created account successfully');

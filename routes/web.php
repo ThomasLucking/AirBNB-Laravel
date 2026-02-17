@@ -9,17 +9,19 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
+Route::middleware('guest')->group(function () {
+    Route::get('/login', function () {
+        return view('login');
+    })->name('login');
 
-Route::get('/register', function () {
-    return view('register');
-})->name('register');
+    Route::get('/register', function () {
+        return view('register');
+    })->name('register');
 
+    Route::post('/store', [UserController::class, 'store'])->name('user.store');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+});
 
-Route::post('/store', [UserController::class, 'store'])->name('user.store');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
-Route::post('/logout', [LoginController::class, 'destroySession'])->name('logout');
+Route::post('/logout', [LoginController::class, 'destroySession'])->middleware('auth')->name('logout');
 
 

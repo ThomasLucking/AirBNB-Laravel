@@ -1,6 +1,6 @@
 <div class="flex-1 flex items-center justify-center text-center">
     <div class="flex flex-col border-2 border-gray-300 rounded-lg p-8 bg-white shadow-lg">
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ route('login.authenticate') }}">
             @csrf
             @if (session('success'))
                 <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
@@ -37,7 +37,7 @@
                     class="bg-red-500 hover:bg-red-600 active:scale-95 transform transition text-white font-bold py-3 rounded-xl mt-2 shadow-md shadow-red-100">
                     Sign in
                 </button>
-                <a href={{ route('register') }} class="text-sm text-gray-600 hover:text-gray-800 transition">
+                 <a href="{{ route('register') }}" class="text-sm text-gray-600 hover:text-gray-800 transition">
                     Don't have an account? <span class="text-red-500 font-bold ml-1">Sign up</span>
                 </a>
             </div>

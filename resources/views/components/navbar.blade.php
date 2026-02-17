@@ -58,7 +58,7 @@
     </div>
 
     <div class="static flex flex-col space-y-2 border-t border-gray-100  p-4">
-        <div class="absolute bottom-0 left-0 px-2 py-2">
+        <div class="mt-auto left-0 px-2 py-2">
             <div class="flex items-center space-x-3 rounded-lg px-2 py-2">
                 <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -66,7 +66,7 @@
                 </svg>
                 @auth
                     <span class="font-medium"> {{ auth()->user()->name }}</span>
-                    <form method="POST" action="/logout">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button
                             class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-bold uppercase tracking-widest rounded-lg shadow-md hover:shadow-lg transform transition-all duration-150 active:scale-95 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
