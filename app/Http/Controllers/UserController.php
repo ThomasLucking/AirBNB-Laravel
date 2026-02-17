@@ -12,8 +12,6 @@ class UserController extends Controller
 {
     public function store(Request $request): RedirectResponse
     {
-        // https://regexr.com/8jgjh
-        $password_pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/';
 
         $validated = $request->validate([
             'name' => 'required|max:255|unique:users,name',
@@ -22,12 +20,12 @@ class UserController extends Controller
         ]);
 
 
-        $validated['password'] = Hash::make($request->password);
+        $validated['password'] = Hash::make($validated['password']);
 
 
         User::create($validated);
 
-        return redirect('/login')->with('success', 'Created account Successfully');
+        return redirect('/login')->with('success', 'Created account successfully');
 
 
     }

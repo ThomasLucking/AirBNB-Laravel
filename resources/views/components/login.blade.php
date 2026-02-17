@@ -37,8 +37,7 @@
                     class="bg-red-500 hover:bg-red-600 active:scale-95 transform transition text-white font-bold py-3 rounded-xl mt-2 shadow-md shadow-red-100">
                     Sign in
                 </button>
-
-                <a href="/register" class="text-sm text-gray-600 hover:text-gray-800 transition">
+                <a href={{ route('register') }} class="text-sm text-gray-600 hover:text-gray-800 transition">
                     Don't have an account? <span class="text-red-500 font-bold ml-1">Sign up</span>
                 </a>
             </div>

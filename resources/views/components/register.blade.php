@@ -24,7 +24,7 @@
 
                 <div class="flex flex-col gap-1">
                     <label class="text-left text-xs font-bold uppercase tracking-wider text-gray-600">Email
-                        Adresse</label>
+                        Address</label>
                     <input name="email"
                         class="text-base border-2 border-gray-200 rounded-lg px-3 py-2 outline-none focus:border-red-500 transition-colors"
                         type="email" placeholder="you@example.com">
