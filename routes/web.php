@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -7,6 +8,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 })->name('home');
+
+
+Route::get('/apartments', function () {
+    return view('apartments');
+})->name('apartment');
 
 
 Route::middleware('guest')->group(function () {
@@ -22,6 +28,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 });
 
-Route::post('/logout', [LoginController::class, 'destroySession'])->middleware('auth')->name('logout');
-
-
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'destroySession'])->name('logout');
+    Route::post('/storeapartments', [ApartmentController::class, 'store'])->name('apartment.store');
+});
