@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="m-8 flex flex-row gap-4">
-                    <x-input-bar placeholder="Price per night" type="number" name="price_per_night"  value="$"/>
+                    <x-input-bar placeholder="Price per night" type="number" name="price_per_night" />
                     <x-input-bar placeholder="Number of Rooms" type="number" name="rooms"  />
                 </div>
 

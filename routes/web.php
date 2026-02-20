@@ -29,6 +29,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/logout', [LoginController::class, 'destroySession'])->middleware('auth')->name('logout');
+    Route::post('/logout', [LoginController::class, 'destroySession'])->name('logout');
     Route::post('/storeapartments', [ApartmentController::class, 'store'])->name('apartment.store');
 });

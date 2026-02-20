@@ -1,7 +1,7 @@
 @props([
     'name' => ''
-    
-    ])
+
+])
 
 
 <div class=" flex flex-col justify-center items-center w-full max-w-xl">
@@ -15,12 +15,12 @@
                     d="M18.085 2.583H7.75a2.583 2.583 0 0 0-2.583 2.584v20.666a2.583 2.583 0 0 0 2.583 2.584h15.5a2.583 2.583 0 0 0 2.584-2.584v-15.5m-7.75-7.75 7.75 7.75m-7.75-7.75v7.75h7.75M15.5 23.25V15.5m-3.875 3.875h7.75"
                     stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            <p class="text-gray-500 text-center">Drag files here or <span class="text-blue-500 underline">click to
+             <p class="text-gray-500 text-center">Drag files here or <span class="text-blue-500 underline">click to
                     select</span></p>
             <input id="fileInput" type="file" class="hidden" multiple accept="image/*" name="{{ $name }}"/>
         </label>
 
-        <ul id="fileListContainer" class="mt-4 space-y-2">
+    <ul id="fileListContainer" class="mt-4 space-y-2">
         </ul>
 
     
@@ -30,9 +30,10 @@
 <script>
     const fileInput = document.getElementById('fileInput');
     const fileListContainer = document.getElementById('fileListContainer');
-
+    let FileArray = [];
     fileInput.addEventListener('change', (event) => {
         const files = Array.from(event.target.files);
+        fileArray = [...fileArray, ...files];
 
         files.forEach((file, index) => {
             const li = document.createElement('li');
@@ -50,13 +51,18 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
                 </button>
-            `;
-
+                `;
+   
             li.querySelector('.remove-btn').addEventListener('click', () => {
+                fileArray.splice(index, 1); 
+                const dt = new DataTransfer();
+                fileArray.forEach(f => dt.items.add(f));
+                fileInput.files = dt.files;
                 li.remove();
-            });
+        });
 
             fileListContainer.appendChild(li);
         });
+
     });
 </script>

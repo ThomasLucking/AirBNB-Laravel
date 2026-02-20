@@ -28,7 +28,7 @@ class ApartmentStoreRequest extends FormRequest
             'rooms' => 'required|integer|min:0',
             'price_per_night' => 'required|numeric|min:0',
             'image_housing' => 'required|array|min:1',
-            'image_housing.*' => 'image|mimes:jpg,png|max:2048'
+            'image_housing.*' => 'image|mimes:jpg,jpeg,png'
         ];
     }
 }
