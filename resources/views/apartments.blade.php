@@ -24,9 +24,13 @@
                 <p class="text-gray-500">Fill in the details to list your apartment.</p>
             </div>
 
-            
-            <form action="{{ route('apartment.store') }}" method="POST" enctype="multipart/form-data" class="flex-row space-y-4">
+
+            <form action="{{ route('apartment.store') }}" method="POST" enctype="multipart/form-data"
+                class="flex-row space-y-4">
                 @csrf
+                @if (session('error'))
+                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                @endif
                 <div class="m-8 flex flex-col gap-4">
                     <x-input-bar placeholder="Property Title" name="title" />
                     <x-input-bar placeholder="Brief Description" name="description" />
@@ -35,7 +39,7 @@
 
                 <div class="m-8 flex flex-row gap-4">
                     <x-input-bar placeholder="Price per night" type="number" name="price_per_night" />
-                    <x-input-bar placeholder="Number of Rooms" type="number" name="rooms"  />
+                    <x-input-bar placeholder="Number of Rooms" type="number" name="rooms" />
                 </div>
 
                 <div class="flex flex-col justify-center items-center">
