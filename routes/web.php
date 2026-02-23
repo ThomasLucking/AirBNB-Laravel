@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 Route::get('/apartments', function () {
     return view('apartments');
-})->name('apartment');
+})->name('apartment.create');
 
 
 Route::middleware('guest')->group(function () {
@@ -30,5 +30,5 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroySession'])->name('logout');
-    Route::post('/storeapartments', [ApartmentController::class, 'store'])->name('apartment.store');
+    Route::post('/apartments', [ApartmentController::class, 'store'])->name('apartment.store');
 });

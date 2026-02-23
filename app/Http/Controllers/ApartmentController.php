@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
+
     public function store(ApartmentStoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
@@ -22,8 +23,8 @@ class ApartmentController extends Controller
 
             if ($images) {
                 foreach ($images as $file) {
-                    $path = Storage::disk('public')->putFile('images', $file);
-
+                    $path = Storage::disk('local')->putFile('images', $file);
+                    
                     $apartment->images()->create([
                         'image_path' => $path
                     ]);

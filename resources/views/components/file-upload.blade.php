@@ -38,8 +38,6 @@
             return { id: crypto.randomUUID(), data: file };
         });
 
-        console.log(newFiles);
-
         newFiles.forEach((file) => {
             selectedFiles.push(file); 
 
@@ -66,7 +64,7 @@
 
             const dataTransfer = new DataTransfer();
             selectedFiles.forEach(fileObj => {
-                dataTransfer.items.add(file.data);
+                dataTransfer.items.add(fileObj.data);
             });
     
             fileInput.files = dataTransfer.files;
