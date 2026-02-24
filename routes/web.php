@@ -14,6 +14,7 @@ Route::get('/apartments', function () {
     return view('apartments');
 })->name('apartment.create');
 
+Route::get('/allapartments', [ApartmentController::class, 'index'])->name('apartment.all');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
@@ -26,6 +27,7 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/store', [UserController::class, 'store'])->name('user.store');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+
 });
 
 Route::middleware('auth')->group(function () {

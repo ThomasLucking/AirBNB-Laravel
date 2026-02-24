@@ -13,6 +13,17 @@ class Apartment extends Model
     protected $fillable = ['user_id', 'title', 'description', 'country', 'rooms', 'price_per_night'];
     public $timestamps = false;
 
+    public function scopeOwnedByUser($query, $userId)
+    {
+        return $query->where('user_id', $userId);
+
+    }
+    public function scopeBookedByUser($query, $userId)
+    {
+        return $query->whereHas('bookings', fn ($q) => $q->where('user_id', $userId));
+    }
+
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
