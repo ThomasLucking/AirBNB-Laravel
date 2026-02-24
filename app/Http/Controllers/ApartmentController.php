@@ -14,18 +14,20 @@ class ApartmentController extends Controller
     public function index(Request $request)
     {
         $apartments = Apartment::query()
+            ->with('images')
             ->when(
-                $request->has('apartments'),
+                $request->filled('apartments') && auth()->check(),
                 fn ($q) => $q->ownedByUser(auth()->id())
             )
             ->when(
-                $request->has('bookings'),
+                $request->filled('bookings') && auth()->check(),
                 fn ($q) => $q->bookedByUser(auth()->id())
             )
-          
-            ->when($request->has('sort_price'), fn ($q) => $q->orderBy('price_per_night', 'asc'))
-            ->when($request->has('sort_rooms'), fn ($q) => $q->orderBy('rooms', 'asc'))
-            ->get();
+
+            ->when($request->filled('sort_price'), fn ($q) => $q->orderBy('price_per_night', 'asc'))
+            ->when($request->filled('sort_rooms'), fn ($q) => $q->orderBy('rooms', 'asc'))
+            ->get()
+            ->paginate(15);
 
         return view('all-apartments', compact('apartments'));
     }

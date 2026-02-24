@@ -8,12 +8,12 @@
 
 
 <div class="max-w-sm m-8">
-<article class="overflow-hidden rounded-lg border border-gray bg-white shadow-xs border-gray-800 dark:bg-white-900 dark:shadow-gray-700/25">
+<article class="overflow-hidden rounded-lg border border-gray-800 bg-white shadow-xs border-gray-800 dark:bg-white-900 dark:shadow-gray-700/25">
   <img alt="" src="{{ $src }}" class="h-56 w-full object-cover">
 
   <div class="p-2.5 sm:p-4">
     <a href="#">
-      <h3 class="text-lg font-medium text-black-500">
+      <h3 class="text-lg font-medium text-black">
         {{ $title }}
       </h3>
     </a>
@@ -23,11 +23,11 @@
     </p>
 
     <div class="space-y-2">
-        <p class="text-medium font-bold text-black italic">
+        <p class="font-bold font-bold text-black italic">
         Price: ${{ $price }}
         </p>
         <span class="inline-flex items-center rounded-md bg-[#FF645C] px-2 py-1 text-xs font-bold text-black">
-        {{ $rooms }} rooms left
+        {{ $rooms }}-room apartment
         </span>
     </div>
 

@@ -1,6 +1,3 @@
-@php
-use Illuminate\Support\Facades\Storage;
-@endphp
 
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -15,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 </head>
+
 <body class="font-sans bg-gray-50 text-gray-900 flex">
     <x-navbar />
     <main class="flex-1 flex flex-col items-center min-h-screen">
@@ -27,10 +25,11 @@ use Illuminate\Support\Facades\Storage;
             @foreach ($apartments as $apartment)
                 @if ($apartment->images->count() > 0)
                     <x-property-card src="{{ asset('storage/' . $apartment->images->first()->image_path) }}"
-                        title="{{ $apartment->title }}" description="{{ $apartment->description }}" price="{{ $apartment->price_per_night }}" rooms="{{ $apartment->rooms }}" />
+                        title="{{ $apartment->title }}" description="{{ $apartment->description }}"
+                        price="{{ $apartment->price_per_night }}" rooms="{{ $apartment->rooms }}" />
                 @else
-                    <x-property-card src="https://via.placeholder.com/300x200?text=No+Image" title="{{ $apartment->title }}"
-                        description="{{ $apartment->description }}" />
+                    <x-property-card src="https://via.placeholder.com/..." title="..." description="..."
+                        price="{{ $apartment->price_per_night }}" rooms="{{ $apartment->rooms }}" />
                 @endif
             @endforeach
         </div>
