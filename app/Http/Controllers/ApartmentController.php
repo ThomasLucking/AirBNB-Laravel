@@ -26,11 +26,12 @@ class ApartmentController extends Controller
 
             ->when($request->filled('sort_price'), fn ($q) => $q->orderBy('price_per_night', 'asc'))
             ->when($request->filled('sort_rooms'), fn ($q) => $q->orderBy('rooms', 'asc'))
-            ->paginate(15);
-            
+            ->paginate(15)->withQueryString();
+
 
         return view('all-apartments', compact('apartments'));
     }
+    
     public function store(ApartmentStoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();

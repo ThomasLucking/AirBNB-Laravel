@@ -28,7 +28,7 @@
                         title="{{ $apartment->title }}" description="{{ $apartment->description }}"
                         price="{{ $apartment->price_per_night }}" rooms="{{ $apartment->rooms }}" />
                 @else
-                    <x-property-card src="https://via.placeholder.com/..." title="..." description="..."
+                    <x-property-card src="https://placehold.co/600x400" title="{{ $apartment->title }}" description="{{ $apartment->description }}"
                         price="{{ $apartment->price_per_night }}" rooms="{{ $apartment->rooms }}" />
                 @endif
             @endforeach
@@ -38,3 +38,4 @@
 </body>
 
 </html>
+

@@ -8,7 +8,7 @@
 
 
 <div class="max-w-sm m-8">
-<article class="overflow-hidden rounded-lg border border-gray-800 bg-white shadow-xs border-gray-800 dark:bg-white-900 dark:shadow-gray-700/25">
+<article class="overflow-hidden rounded-lg border border-gray-800 bg-white shadow-xs  dark:bg-white dark:shadow-gray-700/25">
   <img alt="" src="{{ $src }}" class="h-56 w-full object-cover">
 
   <div class="p-2.5 sm:p-4">
@@ -23,7 +23,7 @@
     </p>
 
     <div class="space-y-2">
-        <p class="font-bold font-bold text-black italic">
+        <p class=" font-bold text-black italic">
         Price: ${{ $price }}
         </p>
         <span class="inline-flex items-center rounded-md bg-[#FF645C] px-2 py-1 text-xs font-bold text-black">
@@ -40,3 +40,4 @@
   </div>
 </article>
 </div>
+
