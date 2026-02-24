@@ -3,15 +3,11 @@
         <button id="sortingDropdownBtn" data-dropdown-toggle="sortingDropdown"
             class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-200 dark:hover:bg-gray-700 transition"
             type="button">
-            <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6h18M7 12h10M11 18h2" />
-            </svg>
             <span>Sorting</span>
             
             @if(request()->filled('sort_price') || request()->filled('sort_rooms'))
                 <span class="flex h-2 w-2 rounded-full bg-indigo-500"></span>
             @endif
-
             <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
@@ -19,9 +15,7 @@
 
         <div id="sortingDropdown"
             class="z-10 hidden w-60 mt-2 bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700">
-            <div class="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
-                <p class="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">Sort By</p>
-            </div>
+            
             <ul class="p-3 space-y-1">
                 <li>
                     <label class="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer group">

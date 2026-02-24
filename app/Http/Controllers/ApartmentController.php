@@ -15,19 +15,14 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::query()
             ->when(
-                $request->has('filter') && in_array('apartments', $request->input('filter', [])),
-                fn ($q) => $q->where('user_id', operator: auth()->id())
+                $request->has('apartments'),
+                fn ($q) => $q->ownedByUser(auth()->id())
             )
-
-            /*
-            $query->when($request->filled('filter.bookings'), fn ($q) =>
-            $q->whereBelongsTo(auth()->user())
-                );
-            */
             ->when(
-                $request->has('filter') && in_array('bookings', $request->input('filter', [])),
-                fn ($q) => $q->where('user_id', operator: auth()->id())
+                $request->has('bookings'),
+                fn ($q) => $q->bookedByUser(auth()->id())
             )
+          
             ->when($request->has('sort_price'), fn ($q) => $q->orderBy('price_per_night', 'asc'))
             ->when($request->has('sort_rooms'), fn ($q) => $q->orderBy('rooms', 'asc'))
             ->get();
