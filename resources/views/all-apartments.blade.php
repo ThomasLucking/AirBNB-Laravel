@@ -33,6 +33,7 @@
                 @endif
             @endforeach
         </div>
+        <div class="mt-6">{{ $apartments->links() }}</div>
     </main>
 </body>
 

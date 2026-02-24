@@ -26,8 +26,8 @@ class ApartmentController extends Controller
 
             ->when($request->filled('sort_price'), fn ($q) => $q->orderBy('price_per_night', 'asc'))
             ->when($request->filled('sort_rooms'), fn ($q) => $q->orderBy('rooms', 'asc'))
-            ->get()
             ->paginate(15);
+            
 
         return view('all-apartments', compact('apartments'));
     }

@@ -1,9 +1,9 @@
 <form method="GET" action="{{ route('apartment.all') }}">
-    @if(request()->filled('sort_price'))
-        <input type="hidden" name="sort_price" value="{{ request('sort_price') }}">
+    @if(request()->filled('apartments'))
+        <input type="hidden" name="apartments" value="{{ request('apartments') }}">
     @endif
-    @if(request()->filled('sort_rooms'))
-        <input type="hidden" name="sort_rooms" value="{{ request('sort_rooms') }}">
+    @if(request()->filled('bookings'))
+        <input type="hidden" name="bookings" value="{{ request('bookings') }}">
     @endif
     <div class="flex items-center justify-center p-4">
         <button id="sortingDropdownBtn" data-dropdown-toggle="sortingDropdown"
