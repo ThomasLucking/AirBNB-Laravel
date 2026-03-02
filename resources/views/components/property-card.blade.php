@@ -3,7 +3,8 @@
     'title' => '',
     'description' => '',
     'price' => '',
-    'rooms' => ''
+    'rooms' => '',
+    'apartment' => null
 ])
 
 
@@ -31,7 +32,7 @@
         </span>
     </div>
 
-    <a href="#" class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#FF645C]">
+    <a href="{{ route('apartment.show', $apartment) }}" class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#FF645C]">
       See more details
       <span aria-hidden="true" class="text-2xl block transition-all group-hover:ms-0.5 rtl:rotate-180">
         →

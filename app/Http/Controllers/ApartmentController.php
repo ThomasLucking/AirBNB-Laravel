@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
+
+    public function show(Apartment $apartment) 
+    {
+        
+        return view('details', [
+            'apartment' => $apartment,
+          
+        ]);
+    }
+
     public function index(Request $request)
     {
         $apartments = Apartment::query()
