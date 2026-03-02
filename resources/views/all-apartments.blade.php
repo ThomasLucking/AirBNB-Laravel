@@ -23,14 +23,9 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             @foreach ($apartments as $apartment)
                 @if ($apartment->images->count() > 0)
-                    <x-property-card :apartment="$apartment"
-                        src="{{ asset('storage/' . $apartment->images->first()->image_path) }}" title="{{ $apartment->title }}"
-                        description="{{ $apartment->description }}" price="{{ $apartment->price_per_night }}"
-                        rooms="{{ $apartment->rooms }}" />
+                    <x-property-card :apartment="$apartment" />
                 @else
-                    <x-property-card :apartment="$apartment" src="https://placehold.co/600x400" title="{{ $apartment->title }}"
-                        description="{{ $apartment->description }}" price="{{ $apartment->price_per_night }}"
-                        rooms="{{ $apartment->rooms }}" />
+                    <x-property-card :apartment="$apartment" />
                 @endif
             @endforeach
         </div>

@@ -11,13 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
-
-    public function show(Apartment $apartment) 
+    public function show(Apartment $apartment)
     {
-        
         return view('details', [
             'apartment' => $apartment,
-          
+
         ]);
     }
 
@@ -41,7 +39,7 @@ class ApartmentController extends Controller
 
         return view('all-apartments', compact('apartments'));
     }
-    
+
     public function store(ApartmentStoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();
