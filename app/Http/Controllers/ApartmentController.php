@@ -13,6 +13,7 @@ class ApartmentController extends Controller
 {
     public function show(Apartment $apartment)
     {
+        $apartment->load('images');
         return view('details', [
             'apartment' => $apartment,
 

@@ -9,7 +9,6 @@
     <title>{{ config('app.name', 'Airbnb Clone') }}</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js"></script>
 </head>
 
 <body class="font-sans bg-gray-50 text-gray-900 flex">
@@ -21,10 +20,7 @@
             <div class="mb-8">
                 @if ($apartment->images->count() > 0)
                     <div class="grid grid-cols-2 gap-2 h-96">
-
-                        <img src="{{ asset('storage/' . $apartment->images->first()->image_path) }}"
-                            alt="{{ $apartment->title }}" class="w-full h-full object-cover rounded-l-xl">
-
+                        <img src="{{ $apartment->image_url }}" alt="{{ $apartment->title }}" class="w-full h-full object-cover rounded-l-xl">
                         <div class="grid grid-cols-2 gap-2">
                             @foreach ($apartment->images->skip(1)->take(4) as $image)
                                 <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $apartment->title }}"
@@ -47,6 +43,10 @@
                     <div>
                         <p class="text-gray-600 text-sm">Price per Night</p>
                         <p class="text-2xl font-bold">${{ $apartment->price_per_night }}</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600 text-sm">Location</p>
+                        <p class="text-2xl font-bold">{{ $apartment->country }}</p>
                     </div>
                 </div>
 
