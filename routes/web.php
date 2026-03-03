@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApartmentController;
+use App\Http\Controllers\Bookings;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,7 @@ Route::get('/allapartments', [ApartmentController::class, 'index'])->name('apart
 
 
 Route::get('/apartments/{apartment}', [ApartmentController::class, 'show'])->name('apartment.show');
-
+Route::post('/storebooking/{apartment}', [Bookings::class, 'store'])->name('bookings.store');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {

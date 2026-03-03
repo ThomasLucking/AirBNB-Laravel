@@ -24,7 +24,6 @@
                 <p class="text-gray-500">Fill in the details to list your apartment.</p>
             </div>
 
-
             <form action="{{ route('apartment.store') }}" method="POST" enctype="multipart/form-data"
                 class="flex-row space-y-4">
                 @csrf

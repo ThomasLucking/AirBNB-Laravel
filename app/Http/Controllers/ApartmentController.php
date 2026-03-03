@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApartmentStoreRequest;
 use App\Models\Apartment;
+use App\Models\Booking;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,10 +14,13 @@ class ApartmentController extends Controller
 {
     public function show(Apartment $apartment)
     {
+
         $apartment->load('images');
         return view('details', [
             'apartment' => $apartment,
-
+            'isBooked' => Booking::where('apartment_id', $apartment->id)
+                ->where('end_date', '>=', now())
+                ->exists(),
         ]);
     }
 
@@ -45,7 +49,7 @@ class ApartmentController extends Controller
     {
         $validated = $request->validated();
 
-        $apartmentData = collect($validated)->except('image_housing')->all();
+        $apartmentData = collect($validated)->except(keys: 'image_housing')->all();
 
         $images = $request->file('image_housing');
 
@@ -68,8 +72,6 @@ class ApartmentController extends Controller
             return redirect('apartments.store')->with('error', 'There was an error creating your apartment');
 
         }
-
-
 
     }
 
