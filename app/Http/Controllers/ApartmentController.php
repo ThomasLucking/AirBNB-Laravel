@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApartmentStoreRequest;
 use App\Models\Apartment;
-use App\Models\Booking;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,9 +17,7 @@ class ApartmentController extends Controller
         $apartment->load('images');
         return view('details', [
             'apartment' => $apartment,
-            'isBooked' => Booking::where('apartment_id', $apartment->id)
-                ->where('end_date', '>=', now())
-                ->exists(),
+
         ]);
     }
 
@@ -28,6 +25,7 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::query()
             ->with('images')
+            ->withExists('bookings')
             ->when(
                 $request->filled('apartments') && auth()->check(),
                 fn ($q) => $q->ownedByUser(auth()->id())

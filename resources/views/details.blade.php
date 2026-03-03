@@ -68,10 +68,10 @@
                             @error('start_date')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
-                            @error('error')
+                            @error('dataconflictError')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
-                            <input type="date" id="start_date" name="start_date"
+                            <input type="date" id="start_date" name="start_date value="{{ old('start_date') }}"
                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                         <div>
@@ -79,10 +79,10 @@
                             @error('end_date')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
-                            @error('error')
+                            @error('dataconflictError')
                                 <p class="text-red-500 text-sm">{{ $message }}</p>
                             @enderror
-                            <input type="date" id="end_date" name="end_date"
+                            <input type="date" id="end_date" name="end_date value="{{ old('end_date') }}"
                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                     </div>
