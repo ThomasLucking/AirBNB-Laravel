@@ -11,6 +11,15 @@ use Illuminate\Support\Facades\DB;
 
 class ApartmentController extends Controller
 {
+    public function show(Apartment $apartment)
+    {
+        $apartment->load('images');
+        return view('details', [
+            'apartment' => $apartment,
+
+        ]);
+    }
+
     public function index(Request $request)
     {
         $apartments = Apartment::query()
@@ -31,7 +40,7 @@ class ApartmentController extends Controller
 
         return view('all-apartments', compact('apartments'));
     }
-    
+
     public function store(ApartmentStoreRequest $request): RedirectResponse
     {
         $validated = $request->validated();

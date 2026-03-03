@@ -23,6 +23,15 @@ class Apartment extends Model
         return $query->whereHas('bookings', fn ($q) => $q->where('user_id', $userId));
     }
 
+    public function getImageUrlAttribute()
+    {
+        if ($this->images->count() > 0) {
+            return asset('storage/' . $this->images->first()->image_path);
+        }
+        return 'https://via.placeholder.com/800x400?text=No+Image';
+    }
+
+
 
     public function user(): BelongsTo
     {

@@ -16,6 +16,10 @@ Route::get('/apartments', function () {
 
 Route::get('/allapartments', [ApartmentController::class, 'index'])->name('apartment.all');
 
+
+Route::get('/apartments/{apartment}', [ApartmentController::class, 'show'])->name('apartment.show');
+
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return view('login');

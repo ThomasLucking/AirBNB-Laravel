@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -23,14 +22,7 @@
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             @foreach ($apartments as $apartment)
-                @if ($apartment->images->count() > 0)
-                    <x-property-card src="{{ asset('storage/' . $apartment->images->first()->image_path) }}"
-                        title="{{ $apartment->title }}" description="{{ $apartment->description }}"
-                        price="{{ $apartment->price_per_night }}" rooms="{{ $apartment->rooms }}" />
-                @else
-                    <x-property-card src="https://placehold.co/600x400" title="{{ $apartment->title }}" description="{{ $apartment->description }}"
-                        price="{{ $apartment->price_per_night }}" rooms="{{ $apartment->rooms }}" />
-                @endif
+               <x-property-card :apartment="$apartment" />
             @endforeach
         </div>
         <div class="mt-6">{{ $apartments->links() }}</div>
@@ -38,4 +30,3 @@
 </body>
 
 </html>
-
