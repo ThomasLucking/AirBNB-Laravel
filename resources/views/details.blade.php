@@ -17,19 +17,26 @@
     <main class="flex-1 flex flex-col items-center min-h-screen p-8">
         <div class="w-full max-w-4xl">
             <h1 class="text-4xl font-bold mb-6">{{ $apartment->title }}</h1>
-            
+
             <div class="mb-8">
                 @if ($apartment->images->count() > 0)
-                    <img src="{{ asset('storage/' . $apartment->images->first()->image_path) }}" 
-                        alt="{{ $apartment->title }}" 
-                        class="w-full h-96 object-cover rounded-lg shadow-lg">
+                    <div class="grid grid-cols-2 gap-2 h-96">
+
+                        <img src="{{ asset('storage/' . $apartment->images->first()->image_path) }}"
+                            alt="{{ $apartment->title }}" class="w-full h-full object-cover rounded-l-xl">
+
+                        <div class="grid grid-cols-2 gap-2">
+                            @foreach ($apartment->images->skip(1)->take(4) as $image)
+                                <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $apartment->title }}"
+                                    class="w-full h-full object-cover last:rounded-br-xl first:rounded-tr-xl">
+                            @endforeach
+                        </div>
+                    </div>
                 @else
-                    <img src="https://via.placeholder.com/800x400?text=No+Image" 
-                        alt="{{ $apartment->title }}" 
-                        class="w-full h-96 object-cover rounded-lg shadow-lg">
+                    <img src="https://via.placeholder.com/800x400?text=No+Image" alt="{{ $apartment->title }}"
+                        class="w-full h-96 object-cover rounded-xl">
                 @endif
             </div>
-
 
             <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
                 <div class="grid grid-cols-2 gap-4 mb-6">
