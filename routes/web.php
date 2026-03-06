@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\Bookings;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;

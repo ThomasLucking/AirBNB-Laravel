@@ -11,16 +11,15 @@ class BookingController extends Controller
 {
     public function store(BookingsStoreRequest $request, Apartment $apartment)
     {
-        $apartment->user_id === auth()->id();
+        
         $validated = $request->validated();
         $days = Carbon::parse($validated['start_date'])->diffInDays(Carbon::parse($validated['end_date']));
         $total = $apartment->price_per_night * $days;
 
-        $alreadyBooked = Booking::where('user_id', auth()->id())
-    ->where('apartment_id', $apartment->getKey())
-    ->where('start_date', '<=', $validated['end_date'])
-    ->where('end_date', '>=', $validated['start_date'])
-    ->exists();
+        $alreadyBooked = Booking::where('apartment_id', $apartment->getKey())
+            ->where('start_date', '<', $validated['end_date'])
+            ->where('end_date', '>', $validated['start_date'])
+            ->exists();
         // checks between 5th and 10th january but if someones books 4th and 7th technically it's not between
 
         if ($alreadyBooked) {
