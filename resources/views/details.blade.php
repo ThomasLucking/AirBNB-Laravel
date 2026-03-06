@@ -15,7 +15,7 @@
     <x-navbar />
     <main class="flex-1 flex flex-col items-center min-h-screen p-8">
         <div class="w-full ">
-            @if (auth()->check() && $apartment->bookings()->where('user_id', auth()->id())->where('end_date', '>=', now())->exists())
+            @if ($hasActiveBooking)
                 <form id="delete_form" action="{{ route('booking.cancel', $apartment) }}" method="POST">
                     @csrf
                     @method('DELETE')
@@ -95,7 +95,7 @@
                     <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg">
                         Book Now
                     </button>
-                    @if (auth()->check() && $apartment->bookings()->where('user_id', auth()->id())->where('end_date', '>=', now())->exists())
+                    @if ($hasActiveBooking)
                         <button form="delete_form" type="submit"
                             class="w-full bg-gray-400 hover:bg-gray-500 cursor-pointer text-white font-bold py-3 rounded-lg mt-3">
                             Cancel Booking
