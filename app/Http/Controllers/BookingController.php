@@ -11,7 +11,7 @@ class BookingController extends Controller
 {
     public function store(BookingsStoreRequest $request, Apartment $apartment)
     {
-        
+
         $validated = $request->validated();
         $days = Carbon::parse($validated['start_date'])->diffInDays(Carbon::parse($validated['end_date']));
         $total = $apartment->price_per_night * $days;
@@ -37,6 +37,28 @@ class BookingController extends Controller
         ]);
 
         return redirect()->route('apartment.all')->with('success', 'Booking confirmed!');
+    }
+
+
+    public function destroy(Apartment $apartment)
+    {
+        $booking = Booking::where('apartment_id', $apartment->getKey())
+            ->where('user_id', auth()->id())
+            ->where('end_date', '>=', now())
+            ->first();
+
+        if ($booking) {
+            $booking->delete();
+            return redirect()->route('apartment.all')->with('success', 'Booking cancelled successfully.');
+        } else {
+            return back()->withErrors([
+                'bookingError' => 'No active booking found to cancel.',
+            ]);
+        }
+
+
+
+
     }
 
 }
