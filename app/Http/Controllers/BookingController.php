@@ -17,6 +17,7 @@ class BookingController extends Controller
         $total = $apartment->price_per_night * $days;
 
         $alreadyBooked = Booking::where('apartment_id', $apartment->getKey())
+            ->where('apartment_id', $apartment->getKey())
             ->where('start_date', '<', $validated['end_date'])
             ->where('end_date', '>', $validated['start_date'])
             ->exists();
