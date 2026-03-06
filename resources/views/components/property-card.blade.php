@@ -11,6 +11,11 @@
 
     <div class="space-y-2">
         <p class="font-bold text-black italic">Price: ${{ $apartment->price_per_night }}</p>
+        @if ($apartment->isCurrentlyBooked())
+            <span class="inline-flex items-center rounded-md bg-yellow-100 px-2 py-1 text-xs font-bold text-yellow-800">
+                Currently Booked
+            </span>
+        @endif
         <span class="inline-flex items-center rounded-md bg-[#FF645C] px-2 py-1 text-xs font-bold text-black">
             {{ $apartment->rooms }}-room apartment
         </span>

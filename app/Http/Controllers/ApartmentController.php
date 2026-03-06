@@ -13,6 +13,7 @@ class ApartmentController extends Controller
 {
     public function show(Apartment $apartment)
     {
+
         $apartment->load('images');
         return view('details', [
             'apartment' => $apartment,
@@ -24,6 +25,7 @@ class ApartmentController extends Controller
     {
         $apartments = Apartment::query()
             ->with('images')
+            ->withExists('bookings')
             ->when(
                 $request->filled('apartments') && auth()->check(),
                 fn ($q) => $q->ownedByUser(auth()->id())
@@ -45,7 +47,7 @@ class ApartmentController extends Controller
     {
         $validated = $request->validated();
 
-        $apartmentData = collect($validated)->except('image_housing')->all();
+        $apartmentData = collect($validated)->except(keys: 'image_housing')->all();
 
         $images = $request->file('image_housing');
 
@@ -68,8 +70,6 @@ class ApartmentController extends Controller
             return redirect('apartments.store')->with('error', 'There was an error creating your apartment');
 
         }
-
-
 
     }
 

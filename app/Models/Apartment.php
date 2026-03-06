@@ -30,8 +30,12 @@ class Apartment extends Model
         }
         return 'https://via.placeholder.com/800x400?text=No+Image';
     }
-
-
+    public function isCurrentlyBooked(): bool
+    {
+        return $this->bookings()
+            ->where('end_date', '>=', now())
+            ->exists();
+    }
 
     public function user(): BelongsTo
     {
