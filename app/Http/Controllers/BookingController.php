@@ -48,7 +48,6 @@ class BookingController extends Controller
             ->first();
 
         if ($booking) {
-            abort_if($booking->user_id !== auth()->id(), 403);
             $booking->delete();
             return redirect()->route('apartment.all')->with('success', 'Booking cancelled successfully.');
         } else {

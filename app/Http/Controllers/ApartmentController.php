@@ -20,6 +20,7 @@ class ApartmentController extends Controller
             'apartment' => $apartment,
             'hasActiveBooking' => Booking::where('apartment_id', $apartment->getKey())
             ->where('user_id', auth()->id())
+            ->where('end_date', '>=', now())
             ->exists(),
 
         ]);
