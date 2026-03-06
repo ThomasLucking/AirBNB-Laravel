@@ -16,10 +16,7 @@
     <main class="flex-1 flex flex-col items-center min-h-screen p-8">
         <div class="w-full ">
             @if ($hasActiveBooking)
-                <form id="delete_form" action="{{ route('booking.cancel', $hasActiveBooking) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                </form>
+                <x-cancel-booking :hasActiveBooking="$hasActiveBooking" />
             @endif
             <form method="POST" action="{{ route('bookings.store', $apartment) }}" class="w-full max-w-2xl mx-auto">
                 @csrf
