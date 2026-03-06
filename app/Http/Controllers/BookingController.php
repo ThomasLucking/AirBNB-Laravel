@@ -6,12 +6,13 @@ use App\Http\Requests\BookingsStoreRequest;
 use App\Models\Apartment;
 use App\Models\Booking;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class BookingController extends Controller
 {
     public function store(BookingsStoreRequest $request, Apartment $apartment)
     {
-        
+
         $validated = $request->validated();
         $days = Carbon::parse($validated['start_date'])->diffInDays(Carbon::parse($validated['end_date']));
         $total = $apartment->price_per_night * $days;
@@ -21,7 +22,7 @@ class BookingController extends Controller
             ->where('start_date', '<', $validated['end_date'])
             ->where('end_date', '>', $validated['start_date'])
             ->exists();
-        // checks between 5th and 10th january but if someones books 4th and 7th technically it's not between
+
 
         if ($alreadyBooked) {
             return back()->withErrors([
@@ -37,6 +38,14 @@ class BookingController extends Controller
         ]);
 
         return redirect()->route('apartment.all')->with('success', 'Booking confirmed!');
+    }
+
+
+    public function destroy(Booking $booking)
+    {
+        Gate::authorize('delete', $booking);
+        $booking->delete();
+        return redirect()->route('apartment.all')->with('success', 'Booking cancelled successfully.');
     }
 
 }

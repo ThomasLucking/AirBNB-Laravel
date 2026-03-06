@@ -17,7 +17,7 @@ class ApartmentController extends Controller
         $apartment->load('images');
         return view('details', [
             'apartment' => $apartment,
-
+            'hasActiveBooking' => $apartment->activeBookingForUser(),
         ]);
     }
 
