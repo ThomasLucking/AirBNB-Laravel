@@ -16,7 +16,7 @@
     <main class="flex-1 flex flex-col items-center min-h-screen p-8">
         <div class="w-full ">
             @if ($hasActiveBooking)
-                <form id="delete_form" action="{{ route('booking.cancel', $apartment) }}" method="POST">
+                <form id="delete_form" action="{{ route('booking.cancel', $hasActiveBooking) }}" method="POST">
                     @csrf
                     @method('DELETE')
                 </form>
@@ -92,14 +92,15 @@
                                 class="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-500">
                         </div>
                     </div>
-                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg">
-                        Book Now
-                    </button>
                     @if ($hasActiveBooking)
                         <button form="delete_form" type="submit"
                             class="w-full bg-gray-400 hover:bg-gray-500 cursor-pointer text-white font-bold py-3 rounded-lg mt-3">
                             Cancel Booking
                         </button>
+                    @else
+                    <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg">
+                        Book Now
+                    </button>
                     @endif
                 </div>
             </form>

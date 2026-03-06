@@ -51,4 +51,11 @@ class Apartment extends Model
     {
         return $this->hasMany(Booking::class);
     }
+    public function activeBookingForUser(): ?Booking
+    {
+        return $this->bookings()
+            ->where('user_id', auth()->id())
+            ->where('end_date', '>=', now())
+            ->first();
+    }
 }

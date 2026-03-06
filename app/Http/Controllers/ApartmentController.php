@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ApartmentStoreRequest;
 use App\Models\Apartment;
-use App\Models\Booking;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -18,11 +17,7 @@ class ApartmentController extends Controller
         $apartment->load('images');
         return view('details', [
             'apartment' => $apartment,
-            'hasActiveBooking' => Booking::where('apartment_id', $apartment->getKey())
-            ->where('user_id', auth()->id())
-            ->where('end_date', '>=', now())
-            ->exists(),
-
+            'hasActiveBooking' => $apartment->activeBookingForUser(),
         ]);
     }
 
