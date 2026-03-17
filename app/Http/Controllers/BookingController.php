@@ -48,4 +48,13 @@ class BookingController extends Controller
         return redirect()->route('apartment.all')->with('success', 'Booking cancelled successfully.');
     }
 
+    public function index()
+    {
+        $bookings = Booking::with('apartment')
+            ->where('user_id', auth()->id())
+            ->paginate(10);
+
+        return view('my-bookings', compact('bookings'));
+    }
+
 }
