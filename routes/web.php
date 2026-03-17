@@ -40,6 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/apartments', [ApartmentController::class, 'store'])->name('apartment.store');
     Route::post('/storebooking/{apartment}', [BookingController::class, 'store'])->name('bookings.store');
     Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('booking.cancel');
-    Route::get('/bookingsown', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
 });
 
