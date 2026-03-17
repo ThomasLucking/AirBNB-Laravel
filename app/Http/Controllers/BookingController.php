@@ -52,7 +52,7 @@ class BookingController extends Controller
     {
         $bookings = Booking::with('apartment')
             ->where('user_id', auth()->id())
-            ->get();
+            ->paginate(10);
 
         return view('my-bookings', compact('bookings'));
     }
