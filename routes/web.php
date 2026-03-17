@@ -21,12 +21,6 @@ Route::get('/allapartments', [ApartmentController::class, 'index'])->name('apart
 Route::get('/apartments/{apartment}', [ApartmentController::class, 'show'])->name('apartment.show');
 
 
-Route::get('/mybookings', function () {
-    return view('my-bookings');
-})->name('mybookings.index');
-
-
-
 Route::middleware('guest')->group(function () {
     Route::get('/login', function () {
         return view('login');
@@ -46,7 +40,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/apartments', [ApartmentController::class, 'store'])->name('apartment.store');
     Route::post('/storebooking/{apartment}', [BookingController::class, 'store'])->name('bookings.store');
     Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('booking.cancel');
-
+    Route::get('/bookingsown', [BookingController::class, 'index'])->name('bookings.index');
 });
 
-Route::get('/bookingsown', [BookingController::class, 'index'])->name('bookings.index');
