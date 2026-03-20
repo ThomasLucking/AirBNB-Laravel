@@ -28,12 +28,12 @@
         </a>
 
         @auth
-            @if (auth()->id() === $apartment->user_id)
+            @can('update', $apartment)
                 <a href="{{ route('apartment.edit', $apartment) }}"
                     class="inline-flex items-center gap-1 rounded-md border border-gray-300 px-2.5 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50 transition-colors">
                     Edit
                 </a>
-            @endif
+            @endcan
         @endauth
     </div>
   </div>

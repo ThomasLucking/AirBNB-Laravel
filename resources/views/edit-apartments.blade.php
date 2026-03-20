@@ -30,6 +30,13 @@
                 @if (session('error'))
                     <span class="text-red-500 text-xs">{{ session('error') }}</span>
                 @endif
+                @if ($errors->any())
+                    <ul class="text-red-500 text-xs">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
                 <div class="m-8 flex flex-col gap-4">
                     <x-input-bar placeholder="Property Title" name="title" :value="old('title', $apartment->title)" />
                     <x-input-bar placeholder="Brief Description" name="description" :value="old('description', $apartment->description)" />

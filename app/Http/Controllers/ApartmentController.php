@@ -78,6 +78,8 @@ class ApartmentController extends Controller
 
     public function edit(Apartment $apartment)
     {
+        $apartment->load('images');
+        Gate::authorize('update', $apartment);
         return view('edit-apartments', compact('apartment'));
     }
 
@@ -93,10 +95,10 @@ class ApartmentController extends Controller
                 $apartment->update($validated);
 
                 if ($images) {
-                    foreach ($apartment->images as $image) {
-                        Storage::disk('public')->delete($image->image_path);
-                        $image->delete();
-                    }
+                    $oldImagePaths = $apartment->images()->pluck('image_path')->all();
+                    Storage::disk('public')->delete($oldImagePaths);
+                    $apartment->images()->delete();
+
                     foreach ($images as $file) {
                         $path = Storage::disk('public')->putFile('images', $file);
                         $apartment->images()->create([
@@ -105,7 +107,7 @@ class ApartmentController extends Controller
                     }
                 }
 
-                return redirect()->route('apartment.all')->with('success', 'Listing updated!');
+                return redirect()->back()->with('error', 'There was an error updating your apartment');
             });
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'There was an error updating your apartment');
