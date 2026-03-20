@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ApartmentStoreRequest;
 use App\Http\Requests\ApartmentUpdateRequest;
 use App\Models\Apartment;
+use Exception;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -109,8 +110,26 @@ class ApartmentController extends Controller
 
                 return redirect()->route('apartment.all')->with('success', 'succesfully edited apartment');
             });
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             return redirect()->back()->with('error', 'There was an error updating your apartment');
+        }
+    }
+    public function destroy(Apartment $apartment)
+    {
+        Gate::authorize('delete', $apartment);
+        $oldImagePaths = $apartment->images()->pluck('image_path')->all();
+
+        try {
+            return DB::transaction(function () use ($apartment, $oldImagePaths) {
+
+                Storage::disk('public')->delete($oldImagePaths);
+                $apartment->images()->delete();
+                $apartment->delete();
+                return redirect()->route('apartment.all')->with('success', 'Successfully deleted apartment.');
+            });
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'There was an error deleting your apartment.');
+
         }
     }
 }
