@@ -124,8 +124,8 @@ class ApartmentController extends Controller
 
                 Storage::disk('public')->delete($oldImagePaths);
                 $apartment->images()->delete();
-                Apartment::destroy($apartment->id);
-                return redirect()->route('apartment.all')->with('success', 'succesfully edited apartment');
+                $apartment->delete();
+                return redirect()->route('apartment.all')->with('success', 'Successfully deleted apartment.');
             });
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'There was an error deleting your apartment.');

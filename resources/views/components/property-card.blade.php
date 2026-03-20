@@ -42,7 +42,7 @@
                             @csrf
                             @method('DELETE')
                             <button type="submit"
-                                class="inline-flex items-center gap-1 rounded-md border border-gray-300 px-2.5 py-1.5 text-xs font-medium bg-red-500 text-black-600  transition-colors">
+                                class="inline-flex items-center gap-1 rounded-md border border-gray-300 px-2.5 py-1.5 text-xs font-medium bg-red-500 text-white  transition-colors">
                                 Delete
                             </button>
                         </form>
