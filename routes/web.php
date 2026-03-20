@@ -10,29 +10,18 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-
 Route::get('/apartments', function () {
     return view('apartments');
 })->name('apartment.create');
 
 Route::get('/allapartments', [ApartmentController::class, 'index'])->name('apartment.all');
-
-
 Route::get('/apartments/{apartment}', [ApartmentController::class, 'show'])->name('apartment.show');
 
-
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
-        return view('login');
-    })->name('login');
-
-    Route::get('/register', function () {
-        return view('register');
-    })->name('register');
-
+    Route::get('/login', fn () => view('login'))->name('login');
+    Route::get('/register', fn () => view('register'))->name('register');
     Route::post('/store', [UserController::class, 'store'])->name('user.store');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
-
 });
 
 Route::middleware('auth')->group(function () {
@@ -41,5 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/storebooking/{apartment}', [BookingController::class, 'store'])->name('bookings.store');
     Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('booking.cancel');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-});
 
+
+    Route::get('/apartments/{apartment}/edit', [ApartmentController::class, 'edit'])->name('apartment.edit');
+    Route::put('/apartments/{apartment}', [ApartmentController::class, 'update'])->name('apartment.update');
+});
