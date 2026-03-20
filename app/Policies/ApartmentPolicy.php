@@ -41,10 +41,7 @@ class ApartmentPolicy
      */
     public function update(User $user, Apartment $apartment): bool
     {
-        if($user->id == $apartment->user_id || $user->role == "admin"){
-            return true;
-        };
-        return false;
+        return $user->id == $apartment->user_id || $user->role == 'admin';
     }
 
     /**

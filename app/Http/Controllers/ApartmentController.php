@@ -87,12 +87,12 @@ class ApartmentController extends Controller
 
         $validated = collect($request->validated())->except('image_housing')->all();
         $images = $request->file('image_housing');
-        
+
         try {
             return DB::transaction(function () use ($apartment, $validated, $images) {
                 $apartment->update($validated);
 
-                if ($images) { 
+                if ($images) {
                     foreach ($apartment->images as $image) {
                         Storage::disk('public')->delete($image->image_path);
                         $image->delete();
