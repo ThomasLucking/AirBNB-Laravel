@@ -21,10 +21,21 @@
         </span>
     </div>
 
-    <a href="{{ route('apartment.show', $apartment) }}" class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#FF645C]">
-      See more details
-      <span aria-hidden="true" class="text-2xl block transition-all group-hover:ms-0.5">→</span>
-    </a>
+    <div class="mt-4 flex items-center justify-between">
+        <a href="{{ route('apartment.show', $apartment) }}" class="group inline-flex items-center gap-1 text-sm font-medium text-[#FF645C]">
+          See more details
+          <span aria-hidden="true" class="text-2xl block transition-all group-hover:ms-0.5">→</span>
+        </a>
+
+        @auth
+            @can('update', $apartment)
+                <a href="{{ route('apartment.edit', $apartment) }}"
+                    class="inline-flex items-center gap-1 rounded-md border border-gray-300 px-2.5 py-1.5 text-xs font-medium text-gray-600 hover:bg-gray-50 transition-colors">
+                    Edit
+                </a>
+            @endcan
+        @endauth
+    </div>
   </div>
 </article>
 </div>

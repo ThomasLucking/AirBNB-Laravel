@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ApartmentStoreRequest;
+use App\Http\Requests\ApartmentUpdateRequest;
 use App\Models\Apartment;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ApartmentController extends Controller
 {
@@ -74,4 +76,41 @@ class ApartmentController extends Controller
     }
 
 
+    public function edit(Apartment $apartment)
+    {
+        Gate::authorize('update', $apartment);
+        $apartment->load('images');
+        return view('edit-apartments', compact('apartment'));
+    }
+
+    public function update(ApartmentUpdateRequest $request, Apartment $apartment)
+    {
+        Gate::authorize('update', $apartment);
+
+        $validated = collect($request->validated())->except('image_housing')->all();
+        $images = $request->file('image_housing');
+
+        try {
+            return DB::transaction(function () use ($apartment, $validated, $images) {
+                $apartment->update($validated);
+
+                if ($images) {
+                    $oldImagePaths = $apartment->images()->pluck('image_path')->all();
+                    Storage::disk('public')->delete($oldImagePaths);
+                    $apartment->images()->delete();
+
+                    foreach ($images as $file) {
+                        $path = Storage::disk('public')->putFile('images', $file);
+                        $apartment->images()->create([
+                            'image_path' => $path
+                        ]);
+                    }
+                }
+
+                return redirect()->route('apartment.all')->with('success', 'succesfully edited apartment');
+            });
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'There was an error updating your apartment');
+        }
+    }
 }
