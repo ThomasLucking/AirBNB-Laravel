@@ -31,7 +31,7 @@ class ApartmentPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user, Apartment $apartment): bool
+    public function create(User $user): bool
     {
         return true;
     }
@@ -41,7 +41,10 @@ class ApartmentPolicy
      */
     public function update(User $user, Apartment $apartment): bool
     {
-        return $user->id == $apartment->user_id;
+        if($user->id == $apartment->user_id || $user->role == "admin"){
+            return true;
+        };
+        return false;
     }
 
     /**

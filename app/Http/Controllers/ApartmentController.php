@@ -108,7 +108,6 @@ class ApartmentController extends Controller
                 return redirect()->route('apartment.all')->with('success', 'Listing updated!');
             });
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->back()->with('error', 'There was an error updating your apartment');
         }
     }
