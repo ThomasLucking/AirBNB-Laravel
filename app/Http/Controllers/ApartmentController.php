@@ -78,8 +78,8 @@ class ApartmentController extends Controller
 
     public function edit(Apartment $apartment)
     {
-        $apartment->load('images');
         Gate::authorize('update', $apartment);
+        $apartment->load('images');
         return view('edit-apartments', compact('apartment'));
     }
 
@@ -107,7 +107,7 @@ class ApartmentController extends Controller
                     }
                 }
 
-                return redirect()->back()->with('error', 'There was an error updating your apartment');
+                return redirect()->route('apartment.all')->with('success', 'succesfully edited apartment');
             });
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'There was an error updating your apartment');
