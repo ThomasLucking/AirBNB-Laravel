@@ -1,5 +1,5 @@
 <x-_layout>
-    <div class="font-sans bg-gray-50 text-gray-900 flex flex-row min-h-screen">
+    <div class="font-sans bg-gray-50 text-gray-900 flex flex-row h-screen">
         <x-navbar />
         <main class="flex-1 overflow-y-auto px-8 py-10">
             <h1 class="text-3xl font-bold mb-8">Top Destinations</h1>
