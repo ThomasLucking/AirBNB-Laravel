@@ -2,6 +2,11 @@
     <div class="font-sans bg-gray-50 text-gray-900 flex flex-row h-screen">
         <x-navbar />
         <main class="flex-1 overflow-y-auto px-8 py-10">
+            @if (session('success'))
+                <div class="mb-6 rounded-lg bg-green-100 px-4 py-3 text-green-800 text-sm">
+                    {{ session('success') }}
+                </div>
+            @endif
             <h1 class="text-3xl font-bold mb-8">Top Destinations</h1>
 
             @forelse($locationData as $data)
