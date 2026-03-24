@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Apartment;
 use DB;
+
 class HomeController extends Controller
 {
     public function index()
@@ -16,19 +17,19 @@ class HomeController extends Controller
             ->limit(3)
             ->pluck('country');
 
-        $locationData = Apartment::whereIn('country', $topLocations)->with('images')->get()
-            ->groupBy('country')
-            ->pipe(function ($apartmentsByCountry) use ($topLocations) {
-                return $topLocations->map(function ($location) use ($apartmentsByCountry) {
-                    return [
-                        'location' => $location,
-                        'apartments' => $apartmentsByCountry->get($location, collect())->take(3)
-                    ];
-                });
-            });
-        
-        return view('home', compact('locationData'));
+        $apartmentsByCountry = Apartment::whereIn('country', $topLocations)
+            ->with('images')
+            ->get()
+            ->groupBy('country');
 
+        $locationData = $topLocations->map(function ($location) use ($apartmentsByCountry) {
+            return [
+                'location' => $location,
+                'apartments' => $apartmentsByCountry->get($location, collect())->take(3),
+            ];
+        });
+
+        return view('home', compact('locationData'));
     }
     //
 }

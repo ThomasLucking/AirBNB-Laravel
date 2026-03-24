@@ -11,6 +11,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+
+
 Route::get('/apartments', function () {
     return view('apartments');
 })->name('apartment.create');
@@ -23,7 +25,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', fn () => view('register'))->name('register');
     Route::post('/store', [UserController::class, 'store'])->name('user.store');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
-    
+
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -33,8 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/storebooking/{apartment}', [BookingController::class, 'store'])->name('bookings.store');
     Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('booking.cancel');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-
-
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('user.update');
     Route::get('/apartments/{apartment}/edit', [ApartmentController::class, 'edit'])->name('apartment.edit');
     Route::put('/apartments/{apartment}', [ApartmentController::class, 'update'])->name('apartment.update');
     Route::delete('/apartments/{apartment}', [ApartmentController::class, 'destroy'])->name('apartment.destroy');
