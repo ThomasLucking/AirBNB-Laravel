@@ -35,8 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/storebooking/{apartment}', [BookingController::class, 'store'])->name('bookings.store');
     Route::delete('/bookings/{booking}', [BookingController::class, 'destroy'])->name('booking.cancel');
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-    Route::get('/edit/{user}', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('/storeuserinfo/{user}', [UserController::class, 'update' ])->name('user.update');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('user.update');
     Route::get('/apartments/{apartment}/edit', [ApartmentController::class, 'edit'])->name('apartment.edit');
     Route::put('/apartments/{apartment}', [ApartmentController::class, 'update'])->name('apartment.update');
     Route::delete('/apartments/{apartment}', [ApartmentController::class, 'destroy'])->name('apartment.destroy');

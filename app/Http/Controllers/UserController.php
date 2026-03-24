@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EditUserRequest;
-use App\Http\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -41,6 +40,10 @@ class UserController extends Controller
         Gate::authorize('update', $user);
 
         $validated = $request->validated();
+        if (empty($validated['password'])) {
+            unset($validated['password']);
+        }
+        unset($validated['password_confirmation']);
 
         $user->update($validated);
 

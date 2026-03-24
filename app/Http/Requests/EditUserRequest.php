@@ -11,7 +11,7 @@ class EditUserRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->can('update', $this->route('user'));
     }
 
     /**
@@ -20,12 +20,12 @@ class EditUserRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-{
-    return [
-        'name' => 'required|string|max:255',
-        'email'=> 'required|email|unique:users,email,' . $this->user->id,
-        'password' => 'required|string|min:8|confirmed',
-        'password_confirmation' => 'nullable',
-    ];
-}
+    {
+        return [
+            'name' => 'required|string|unique|max:255',
+            'email' => 'required|email|unique:users,email,' . $this->user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'password_confirmation' => 'nullable',
+        ];
+    }
 }
