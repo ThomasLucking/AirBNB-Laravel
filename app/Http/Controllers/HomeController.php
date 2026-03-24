@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Apartment;
-use App\Models\Booking;
 use DB;
 class HomeController extends Controller
 {
-    public function index(Apartment $apartment, Booking $booking)
+    public function index()
     {
         $topLocations = DB::table('bookings')
             ->join('apartments', 'apartments.id', '=', 'bookings.apartment_id')
@@ -16,14 +15,17 @@ class HomeController extends Controller
             ->orderByDesc('bookings_count')
             ->limit(3)
             ->pluck('country');
-            
-        $locationData = $topLocations->map(function ($location) {
-            $apartments = Apartment::where('country', $location)->with('images')->limit(2)->get();
-            return [
-                'location' => $location,
-                'apartments' => $apartments
-            ];
-        });
+
+        $locationData = Apartment::whereIn('country', $topLocations)->with('images')->get()
+            ->groupBy('country')
+            ->pipe(function ($apartmentsByCountry) use ($topLocations) {
+                return $topLocations->map(function ($location) use ($apartmentsByCountry) {
+                    return [
+                        'location' => $location,
+                        'apartments' => $apartmentsByCountry->get($location, collect())->take(3)
+                    ];
+                });
+            });
         
         return view('home', compact('locationData'));
 

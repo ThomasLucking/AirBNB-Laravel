@@ -1,7 +1,7 @@
 <div class="flex h-screen w-64 shrink-0 flex-col border-r border-gray-200 bg-white p-4 font-sans text-gray-600">
     <div class=" static flex flex-col space-y-6">
         <nav class="flex flex-col space-y-2">
-            <a href="{{ 'home' }}" class="flex items-center justify-between rounded-lg px-2 py-2 hover:bg-gray-100">
+            <a href="{{ route('home') }}" class="flex items-center justify-between rounded-lg px-2 py-2 hover:bg-gray-100">
                 <div class="flex items-center space-x-3">
                     <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

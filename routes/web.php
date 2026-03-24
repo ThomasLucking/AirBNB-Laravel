@@ -25,7 +25,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
     
 });
-Route::get('/', [HomeController::class, 'index'])->name('toprented.get');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroySession'])->name('logout');
