@@ -58,13 +58,9 @@ npm run build
 ```
 
 ### Development
-
+To run the project locally
 ```bash
-# Run all dev servers concurrently (Laravel + Vite)
-npm run dev
-
-# In a separate terminal
-php artisan serve
+composer run dev
 ```
 
 The app will be available at `http://localhost:8000`.
@@ -76,46 +72,4 @@ Running `php artisan migrate --seed` creates:
 - 10 sample apartment listings with images
 - 20 sample bookings with realistic date ranges
 
-## Project Structure
 
-```
-app/
-  Http/
-    Controllers/     # HomeController, ApartmentController, BookingController,
-                     # UserController, AdminController, LoginController
-    Middleware/      # Admin role middleware
-    Requests/        # Form request validation
-  Models/            # User, Apartment, Booking, Image
-  Policies/          # ApartmentPolicy, BookingPolicy, UserPolicy
-database/
-  migrations/        # 7 migration files
-  factories/         # Model factories for seeding
-resources/
-  views/
-    components/      # Reusable Blade components (navbar, property card, filters, etc.)
-routes/
-  web.php            # All application routes
-```
-
-## Roles & Permissions
-
-| Action | Guest | User | Admin |
-|---|---|---|---|
-| Browse apartments | Yes | Yes | Yes |
-| Create listing | No | Yes | Yes |
-| Edit/delete own listing | No | Yes | Yes |
-| Book apartments | No | Yes | Yes |
-| Cancel own bookings | No | Yes | Yes |
-| Edit own profile | No | Yes | Yes |
-| Admin panel | No | No | Yes |
-| Promote/delete users | No | No | Yes |
-
-To create an admin, seed the database and then manually set `role = 'admin'` on a user record, or use `php artisan tinker`:
-
-```php
-User::find(1)->update(['role' => 'admin']);
-```
-
-## License
-
-This project is open-source and available under the [MIT license](https://opensource.org/licenses/MIT).
