@@ -24,7 +24,8 @@ class AdminController extends Controller
         if ($user->role === 'admin') {
             return redirect()->route('admin.panel')->with('error', 'User is already an admin.');
         }
-        $user->update(['role' => 'admin']);
+        $user->role = 'admin';
+        $user->save();
         return redirect()->route('admin.panel')->with('success', 'User promoted to admin!');
     }
 
