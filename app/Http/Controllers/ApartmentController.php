@@ -69,8 +69,8 @@ class ApartmentController extends Controller
                 }
                 return redirect('/')->with('success', 'Created Apartment successfully');
             });
-        } catch (Exceptions) {
-            return redirect('apartments.store')->with('error', 'There was an error creating your apartment');
+        } catch (Exception $e) {
+            return redirect()->route('apartment.store')->with('error', 'There was an error creating your apartment');
 
         }
 
@@ -108,7 +108,7 @@ class ApartmentController extends Controller
                     }
                 }
 
-                return redirect()->route('apartment.all')->with('success', 'succesfully edited apartment');
+                return redirect()->route('apartment.all')->with('success', 'Succesfully edited apartment');
             });
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'There was an error updating your apartment');

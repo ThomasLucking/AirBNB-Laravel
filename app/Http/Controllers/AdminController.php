@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Gate;
 
 class AdminController extends Controller
 {
-    //
-
     public function show(): View
     {
         $users = User::select(['id', 'name', 'role'])->paginate(20);
@@ -32,7 +30,7 @@ class AdminController extends Controller
 
     public function destroy(User $user)
     {
-        
+
         Gate::authorize('destroy', $user);
 
         DB::transaction(function () use ($user) {

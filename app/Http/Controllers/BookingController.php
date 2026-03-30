@@ -12,17 +12,20 @@ class BookingController extends Controller
 {
     public function store(BookingsStoreRequest $request, Apartment $apartment)
     {
+        if ($apartment->user_id === auth()->id()) {
+            return back()->withErrors([
+                'ownershipError' => 'You cannot book your own apartment.',
+            ])->withInput();
+        }
 
         $validated = $request->validated();
-        $days = Carbon::parse($validated['start_date'])->diffInDays(Carbon::parse($validated['end_date']));
+        $days  = Carbon::parse($validated['start_date'])->diffInDays(Carbon::parse($validated['end_date']));
         $total = $apartment->price_per_night * $days;
 
         $alreadyBooked = Booking::where('apartment_id', $apartment->getKey())
-            ->where('apartment_id', $apartment->getKey())
             ->where('start_date', '<', $validated['end_date'])
             ->where('end_date', '>', $validated['start_date'])
             ->exists();
-
 
         if ($alreadyBooked) {
             return back()->withErrors([
@@ -34,7 +37,7 @@ class BookingController extends Controller
             ...$validated,
             'user_id'      => auth()->id(),
             'apartment_id' => $apartment->getKey(),
-            'total' => $total
+            'total'        => $total,
         ]);
 
         return redirect()->route('apartment.all')->with('success', 'Booking confirmed!');

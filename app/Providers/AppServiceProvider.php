@@ -2,13 +2,14 @@
 
 namespace App\Providers;
 
+use App\Policies\ApartmentPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Booking;
 use App\Models\User;
 use App\Policies\BookingPolicy;
-use App\Policies\EditUserInfoPolicy;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Apartment;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(Apartment::class, ApartmentPolicy::class);
         Gate::policy(Booking::class, BookingPolicy::class);
         Gate::policy(User::class, UserPolicy::class);
     }
