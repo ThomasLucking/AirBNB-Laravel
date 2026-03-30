@@ -1,59 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# AirBNB Laravel Clone
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-featured Airbnb-inspired property rental web application built with Laravel 12 and Tailwind CSS. Users can list apartments, browse available properties, and make bookings — all with role-based access control and a clean, responsive UI.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Apartment Listings** — Create, edit, and delete property listings with multiple image uploads
+- **Booking System** — Book apartments by date range with automatic conflict detection and price calculation
+- **Browse & Search** — Filter apartments by ownership or booking history; sort by price or room count
+- **Home Page** — Showcases the top 3 most-booked destinations with featured properties
+- **User Profiles** — Users can update their name, email, and password
+- **Admin Panel** — Admins can view all users, promote them to admin, or delete their accounts
+- **Authorization** — Policy-based access control ensures users can only manage their own data
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Layer | Technology |
+|---|---|
+| Backend | PHP 8.2+, Laravel 12 |
+| Frontend | Blade, Tailwind CSS 4, Flowbite |
+| Build Tool | Vite 7 |
+| Database | SQLite (configurable) |
+| Auth | Session-based (database driver) |
 
-## Learning Laravel
+## Getting Started
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Prerequisites
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2+
+- Composer
+- Node.js & npm
 
-## Laravel Sponsors
+### Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+# Clone the repository
+git clone <repo-url>
+cd AirBNB-Laravel
 
-### Premium Partners
+# Install PHP dependencies
+composer install
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# Install JS dependencies
+npm install
 
-## Contributing
+# Copy environment file and generate app key
+cp .env.example .env
+php artisan key:generate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Run migrations and seed the database
+php artisan migrate --seed
 
-## Code of Conduct
+# Link storage for image uploads
+php artisan storage:link
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+# Build frontend assets
+npm run build
+```
 
-## Security Vulnerabilities
+### Development
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+# Run all dev servers concurrently (Laravel + Vite)
+npm run dev
+
+# In a separate terminal
+php artisan serve
+```
+
+The app will be available at `http://localhost:8000`.
+
+## Database Seeder
+
+Running `php artisan migrate --seed` creates:
+- 10 sample users
+- 10 sample apartment listings with images
+- 20 sample bookings with realistic date ranges
+
+## Project Structure
+
+```
+app/
+  Http/
+    Controllers/     # HomeController, ApartmentController, BookingController,
+                     # UserController, AdminController, LoginController
+    Middleware/      # Admin role middleware
+    Requests/        # Form request validation
+  Models/            # User, Apartment, Booking, Image
+  Policies/          # ApartmentPolicy, BookingPolicy, UserPolicy
+database/
+  migrations/        # 7 migration files
+  factories/         # Model factories for seeding
+resources/
+  views/
+    components/      # Reusable Blade components (navbar, property card, filters, etc.)
+routes/
+  web.php            # All application routes
+```
+
+## Roles & Permissions
+
+| Action | Guest | User | Admin |
+|---|---|---|---|
+| Browse apartments | Yes | Yes | Yes |
+| Create listing | No | Yes | Yes |
+| Edit/delete own listing | No | Yes | Yes |
+| Book apartments | No | Yes | Yes |
+| Cancel own bookings | No | Yes | Yes |
+| Edit own profile | No | Yes | Yes |
+| Admin panel | No | No | Yes |
+| Promote/delete users | No | No | Yes |
+
+To create an admin, seed the database and then manually set `role = 'admin'` on a user record, or use `php artisan tinker`:
+
+```php
+User::find(1)->update(['role' => 'admin']);
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is open-source and available under the [MIT license](https://opensource.org/licenses/MIT).
