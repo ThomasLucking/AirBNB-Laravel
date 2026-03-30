@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ApartmentController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\HomeController;
@@ -40,4 +41,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/apartments/{apartment}/edit', [ApartmentController::class, 'edit'])->name('apartment.edit');
     Route::put('/apartments/{apartment}', [ApartmentController::class, 'update'])->name('apartment.update');
     Route::delete('/apartments/{apartment}', [ApartmentController::class, 'destroy'])->name('apartment.destroy');
+
+
+    Route::middleware('admin')->group(function () {
+        Route::get('/admin', [AdminController::class, 'show'])->name('admin.panel');
+        Route::patch('/users/{user}/promote', [AdminController::class, 'promote'])->name('users.promote');
+        Route::delete('/users/{user}', [AdminController::class, 'destroy'])->name('users.destroy');
+    });
+
+
 });

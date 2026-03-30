@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Policies\UserPolicy;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Booking;
 use App\Models\User;
@@ -25,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Booking::class, BookingPolicy::class);
-        Gate::policy(User::class, EditUserInfoPolicy::class);
+        Gate::policy(User::class, UserPolicy::class);
     }
 }
