@@ -22,7 +22,7 @@ class EditUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique|max:255',
+            'name' => 'required|string|max:255|unique:users,name,' . $this->route('user')->id,
             'email' => 'required|email|unique:users,email,' . $this->user->id,
             'password' => 'nullable|string|min:8|confirmed',
             'password_confirmation' => 'nullable',

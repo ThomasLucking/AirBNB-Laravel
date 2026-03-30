@@ -1,5 +1,4 @@
 <x-layout title="Admin Panel">
-
     <body class="font-sans bg-gray-50 text-gray-900">
         <main class="min-h-screen p-8">
             <div class="max-w-5xl mx-auto bg-white p-8 rounded-xl shadow-sm border-2 border-gray-200">
