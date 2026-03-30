@@ -7,6 +7,11 @@
                     {{ session('success') }}
                 </div>
             @endif
+            @if (session('error'))
+                <div class="mb-6 rounded-lg bg-red-100 px-4 py-3 text-red-800 text-sm">
+                    {{ session('error') }}
+                </div>
+            @endif
             <h1 class="text-3xl font-bold mb-8">Top Destinations</h1>
 
             @forelse($locationData as $data)
@@ -21,8 +26,7 @@
                             <article class="overflow-hidden rounded-lg border border-gray-800 bg-white shadow-xs">
                                 @if($apartment->images->first())
                                     <img src="{{ Storage::url($apartment->images->first()->image_path) }}"
-                                         class="h-56 w-full object-cover"
-                                         alt="{{ $apartment->title }}">
+                                        class="h-56 w-full object-cover" alt="{{ $apartment->title }}">
                                 @else
                                     <div class="h-56 w-full bg-gray-200 flex items-center justify-center text-gray-400">
                                         No image
@@ -38,9 +42,10 @@
                                         <p class="font-bold text-black italic">{{ $apartment->price_per_night }}$/night</p>
                                     </div>
                                     <a href="{{ route('apartment.show', $apartment) }}"
-                                       class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#FF645C]">
+                                        class="group mt-4 inline-flex items-center gap-1 text-sm font-medium text-[#FF645C]">
                                         View Apartment
-                                        <span aria-hidden="true" class="text-2xl block transition-all group-hover:ms-0.5">→</span>
+                                        <span aria-hidden="true"
+                                            class="text-2xl block transition-all group-hover:ms-0.5">→</span>
                                     </a>
                                 </div>
                             </article>
@@ -51,7 +56,7 @@
                 <div class="text-center py-16">
                     <p class="text-gray-500 text-lg">No popular destinations yet.</p>
                     <a href="{{ route('apartment.all') }}"
-                       class="mt-4 inline-block text-[#FF645C] font-medium hover:underline">Browse all apartments</a>
+                        class="mt-4 inline-block text-[#FF645C] font-medium hover:underline">Browse all apartments</a>
                 </div>
             @endforelse
         </main>

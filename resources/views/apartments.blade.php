@@ -12,7 +12,7 @@
                     class="flex-row space-y-4">
                     @csrf
                     @if (session('error'))
-                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                        <span class="text-red-500 text-xs">{{ session('error') }}</span>
                     @endif
                     <div class="m-8 flex flex-col gap-4">
                         <x-input-bar placeholder="Property Title" name="title" />
@@ -40,4 +40,4 @@
         </main>
     
     </body>
-</x-_layout>
+</x-layout>

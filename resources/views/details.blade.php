@@ -2,6 +2,9 @@
     <body class="font-sans bg-gray-50 text-gray-900 flex">
         <main class="flex-1 flex flex-col items-center min-h-screen p-8">
             <div class="w-full ">
+                @error('ownershipError')
+                    <span class="block text-red-500 text-sm mt-2">{{ $message }}</span>
+                @enderror
                 @if ($hasActiveBooking)
                     <x-cancel-booking :hasActiveBooking="$hasActiveBooking" />
                 @endif

@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         } catch (\Exception $e) {
             report($e);
-
+            session()->flash('error', 'Could not load featured locations. Please try again later.');
             return view('home', ['locationData' => collect()]);
         }
     }
