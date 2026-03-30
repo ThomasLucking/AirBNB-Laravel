@@ -26,6 +26,6 @@ class EditUserInfoPolicy
 
     public function destroy(User $authUser, User $user): bool
     {
-        return $authUser->role === 'admin';
+        return $authUser->role === 'admin' && $authUser->id !== $user->id;
     }
 }

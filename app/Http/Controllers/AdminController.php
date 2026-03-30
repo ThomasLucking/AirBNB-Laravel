@@ -20,10 +20,11 @@ class AdminController extends Controller
     public function promote(User $user)
     {
         Gate::authorize('promote', $user);
+        if ($user->role === 'admin') {
+            return redirect()->route('admin.panel')->with('error', 'User is already an admin.');
+        }
         $user->update(['role' => 'admin']);
-        return redirect()->route('admin.panel')->with('success', 'User Updated!');
-
-
+        return redirect()->route('admin.panel')->with('success', 'User promoted to admin!');
     }
 
 
