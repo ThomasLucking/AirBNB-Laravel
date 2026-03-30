@@ -2,7 +2,6 @@
 <x-_layout>
     <body class="font-sans bg-gray-50 text-gray-900 flex">
         <main class="flex-1 flex flex-col items-center justify-center min-h-screen p-8">
-    
             <div class="w-full max-w-xl space-y-6 bg-white p-8 rounded-xl shadow-sm border-2 border-gray-200 ">
                 <div class="mb-6">
                     <h2 class="text-2xl font-semibold text-gray-800">Create New Listing</h2>
