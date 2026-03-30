@@ -21,7 +21,7 @@ class EditUserInfoPolicy
 
     public function promote(User $authUser, User $user): bool
     {
-        return $authUser->role === 'admin';
+        return $authUser->role === 'admin' && $authUser->id !== $user->id;
     }
 
     public function destroy(User $authUser, User $user): bool

@@ -13,7 +13,7 @@ class AdminController extends Controller
 
     public function show(): View
     {
-        $users = User::all();
+        $users = User::select(['id', 'name', 'role'])->paginate(20);
         return view('admin-panel', compact('users'));
     }
 
@@ -36,8 +36,9 @@ class AdminController extends Controller
         Gate::authorize('destroy', $user);
 
         DB::transaction(function () use ($user) {
-            foreach ($user->apartments as $apartment) {
-                $apartment->bookings()->delete();
+            $apartmentIds = $user->apartments()->pluck('id');
+            if ($apartmentIds->isNotEmpty()) {
+                DB::table('bookings')->whereIn('apartment_id', $apartmentIds)->delete();
             }
             $user->bookings()->delete();
             $user->apartments()->delete();

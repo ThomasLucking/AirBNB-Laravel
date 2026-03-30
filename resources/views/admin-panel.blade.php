@@ -25,8 +25,7 @@
                         <div
                             class="flex items-center justify-between rounded-lg border border-gray-200 px-5 py-4 hover:bg-gray-50 transition-colors">
                             <div class="flex items-center space-x-3">
-                                <svg class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
+                                <svg class="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
@@ -50,13 +49,18 @@
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
+                                        onclick="return confirm('Are you sure you want to delete this user and all their associated data? This action cannot be undone.');"
                                         class="px-4 py-2 text-sm font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors">
                                         Delete
                                     </button>
+
                                 </form>
                             </div>
                         </div>
                     @endforeach
+                </div>
+                <div class="mt-6">
+                    {{ $users->links() }}
                 </div>
             </div>
         </main>
