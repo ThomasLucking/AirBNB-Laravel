@@ -36,15 +36,16 @@
                             </div>
 
                             <div class="flex items-center space-x-2">
-                                <form action="{{ route('users.promote', $user) }}" method="POST">
-                                    @csrf
-                                    @method('PATCH')
-                                    <button type="submit"
-                                        class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors">
-                                        Promote
-                                    </button>
-                                </form>
-
+                                @if($user->role !== 'admin')
+                                    <form action="{{ route('users.promote', $user) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit"
+                                            class="px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors">
+                                            Promote
+                                        </button>
+                                    </form>
+                                @endif
                                 <form action="{{ route('users.destroy', $user) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

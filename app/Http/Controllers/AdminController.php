@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -30,16 +31,14 @@ class AdminController extends Controller
 
     public function destroy(User $user)
     {
-        if ($user->id === auth()->id()) {
-            return redirect()->route('admin.panel')->with('error', 'You cannot delete yourself.');
-        }
-
+        
         Gate::authorize('destroy', $user);
 
         DB::transaction(function () use ($user) {
             $apartmentIds = $user->apartments()->pluck('id');
             if ($apartmentIds->isNotEmpty()) {
-                DB::table('bookings')->whereIn('apartment_id', $apartmentIds)->delete();
+                Booking::whereIn('apartment_id', $apartmentIds)->delete();
+
             }
             $user->bookings()->delete();
             $user->apartments()->delete();
