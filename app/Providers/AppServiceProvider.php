@@ -9,6 +9,7 @@ use App\Models\Booking;
 use App\Models\User;
 use App\Policies\BookingPolicy;
 use Illuminate\Support\Facades\Gate;
+use App\Models\Apartment;
 
 class AppServiceProvider extends ServiceProvider
 {
