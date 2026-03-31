@@ -1,6 +1,5 @@
-<x-_layout>
+<x-layout>
     <div class="font-sans bg-gray-50 text-gray-900 flex flex-row h-screen">
-        <x-navbar />
         <main class="flex-1 overflow-y-auto flex flex-col items-center px-8 py-10">
             <h1 class="text-2xl font-bold mb-6">All Apartments</h1>
             <div class="flex flex-row gap-4 mb-6">
@@ -15,4 +14,4 @@
             <div class="mt-6">{{ $apartments->links() }}</div>
         </main>
     </div>
-</x-_layout>
+</x-layout>
