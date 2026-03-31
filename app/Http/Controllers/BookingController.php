@@ -47,6 +47,11 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         Gate::authorize('delete', $booking);
+
+        if (Carbon::parse($booking->start_date)->isPast()) {
+            return back();
+        }
+        
         $booking->delete();
         return redirect()->route('apartment.all')->with('success', 'Booking cancelled successfully.');
     }
