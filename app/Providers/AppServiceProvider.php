@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Policies\ApartmentPolicy;
 use App\Policies\UserPolicy;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Booking;
 use App\Models\User;
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        URL::forceHttps();
         Gate::policy(Apartment::class, ApartmentPolicy::class);
         Gate::policy(Booking::class, BookingPolicy::class);
         Gate::policy(User::class, UserPolicy::class);
