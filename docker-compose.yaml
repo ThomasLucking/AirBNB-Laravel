@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      APP_NAME: ${APP_NAME:-AirBNB}
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_KEY: ${APP_KEY:?set APP_KEY in Komodo environment}
+      APP_URL: ${APP_URL:?set APP_URL in Komodo environment}
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: sqlite
+      DB_DATABASE: /app/data/database.sqlite
+    volumes:
+      - db:/app/data
+      - uploads:/app/storage/app/public
+
+volumes:
+  db:
+  uploads:
