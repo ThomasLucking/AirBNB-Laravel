@@ -17,6 +17,24 @@ services:
       - db:/app/data
       - uploads:/app/storage/app/public
 
+  caddy:
+    image: caddy:2.10
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    environment:
+      DOMAIN: ${DOMAIN:?set DOMAIN in Komodo environment}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+
 volumes:
   db:
   uploads:
+  caddy_data:
+  caddy_config:
